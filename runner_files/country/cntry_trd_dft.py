@@ -1,0 +1,56 @@
+import pandas as pd
+import os
+import sys
+import psycopg2
+import argparse
+from typing import Optional
+from psycopg2.extensions import connection
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from utils import get_palceholders
+from commodity_runner import commodity_runner
+
+
+class CntryTrdDft(commodity_runner):
+    def __init__(self, run_year:str, conn: Optional[connection]=None):
+        super(CntryTrdDft, self).__init__(conn)
+        self.run_year: str = run_year
+
+
+    def run(self):
+
+        cur = self._conn.cursor()
+
+        sql_nm = 'cntry_trd_dft.sql'
+        base_year = 2018
+        n = int(self.run_year) -  base_year
+
+        if(n<0): return
+
+        for i in range(0,n+1):
+            if(int(self.run_year) > base_year and i==0): continue
+            if(i>10): break
+            if(i==0): 
+                sql_vars = get_palceholders(self.run_year, 1)
+                pct_change_yr_compr = 0
+            else: 
+                sql_vars = get_palceholders(self.run_year, i)
+                pct_change_yr_compr = sql_vars['pct_change_yr_compr']
+
+            sql_vars = {
+                'run_yr': sql_vars['run_yr'],
+                'prv_yr': sql_vars['prv_yr'],
+                'cntry_int_exp_tb': sql_vars['cntry_int_exp_tb'],
+                'cntry_int_imp_tb': sql_vars['cntry_int_imp_tb'],
+                'cntry_trd_dft_tb': sql_vars['cntry_trd_dft_tb'],
+                'pct_change_yr_compr': pct_change_yr_compr
+            }
+
+            output_tb = sql_vars['cntry_trd_dft_tb']
+
+
+            sql_query = self.get_sql(sql_nm, sql_vars)
+
+            df = self.execute_sql(sql_query)
+
+            self.write_table(df, output_tb, 'sum', i)

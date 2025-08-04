@@ -1,0 +1,27 @@
+DB_connection: 
+  host: "aws-0-ap-southeast-1.pooler.supabase.com"
+  dbname: "postgres"
+  user: "postgres.jkofgpvpovexxdpynwia"
+  password: "ShivShakti1/0"
+  port: 6543
+
+Table_config:
+  cmd_otpt_tb_imp: 'postgres.output_schema."cmd_int_imp"'
+  cmd_otpt_tb_exp: 'postgres.output_schema."cmd_int_exp"'  
+  cmd_int_exp_tb: 'postgres.output_schema."cmd_int_exp"'
+  cmd_int_imp_tb: 'postgres.output_schema."cmd_int_imp"'
+  cmd_trd_dft_tb: 'postgres.output_schema."cmd_trd_dft"'
+  cntry_int_exp_tb: 'postgres.output_schema."cntry_int_exp"'
+  cntry_int_imp_tb: 'postgres.output_schema."cntry_int_imp"'
+  cntry_trd_dft_tb: 'postgres.output_schema."cntry_trd_dft"' 
+  cmd_scr_tb_imp_tb: 'cmd_import_'
+  cmd_scr_imp_db_schema: 'postgres.commodity_schema.'
+  cmd_scr_tb_exp_tb: 'cmd_export_'
+  cmd_scr_exp_db_schema: 'postgres.commodity_schema.'
+  cntry_scr_tb_imp_tb: 'cntry_import_'
+  cntry_scr_imp_db_schema: 'postgres.country_schema.'
+  cntry_scr_tb_exp_tb: 'cntry_export_'
+  cntry_scr_exp_db_schema: 'postgres.country_schema.'
+  cntry_cd_mapping: 'postgres.output_schema.cntry_cd_mapping'  
+  cntry_otpt_tb_exp: 'postgres.output_schema."cntry_int_exp"'
+  cntry_otpt_tb_imp: 'postgres.output_schema."cntry_int_imp"'
