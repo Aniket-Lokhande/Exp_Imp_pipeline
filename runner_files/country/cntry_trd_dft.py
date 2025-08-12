@@ -30,11 +30,12 @@ class CntryTrdDft(commodity_runner):
         for i in range(0,n+1):
             if(int(self.run_year) > base_year and i==0): continue
             if(i>10): break
+
+            sql_vars = get_palceholders(self.run_year, i)
+
             if(i==0): 
-                sql_vars = get_palceholders(self.run_year, 1)
                 pct_change_yr_compr = 0
             else: 
-                sql_vars = get_palceholders(self.run_year, i)
                 pct_change_yr_compr = sql_vars['pct_change_yr_compr']
 
             sql_vars = {

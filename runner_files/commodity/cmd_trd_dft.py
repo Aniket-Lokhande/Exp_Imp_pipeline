@@ -26,6 +26,11 @@ class CmdTrdDft(commodity_runner):
 
         if(n<0): return
 
+        if(i==0): 
+            pct_change_yr_compr = 0
+        else: 
+            pct_change_yr_compr = sql_vars['pct_change_yr_compr']
+
         for i in range(0,n+1):
             if(int(self.run_year) > base_year and i==0): continue
             if(i>10): break
@@ -38,7 +43,7 @@ class CmdTrdDft(commodity_runner):
                 'cmd_int_exp_tb': sql_vars['cmd_int_exp_tb'],
                 'cmd_int_imp_tb': sql_vars['cmd_int_imp_tb'],
                 'cmd_trd_dft_tb': sql_vars['cmd_trd_dft_tb'],
-                'pct_change_yr_compr': sql_vars['pct_change_yr_compr']
+                'pct_change_yr_compr': pct_change_yr_compr
             }
 
             output_tb = sql_vars['cmd_trd_dft_tb']
