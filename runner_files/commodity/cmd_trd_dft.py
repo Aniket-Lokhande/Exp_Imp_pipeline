@@ -21,21 +21,21 @@ class CmdTrdDft(commodity_runner):
 
         sql_nm = 'cmd_trd_dft.sql'
 
-        base_year = 2019
+        base_year = 2018
         n = int(self.run_year) -  base_year
 
         if(n<0): return
 
-        if(i==0): 
-            pct_change_yr_compr = 0
-        else: 
-            pct_change_yr_compr = sql_vars['pct_change_yr_compr']
-
         for i in range(0,n+1):
-            if(int(self.run_year) > base_year and i==0): continue
+            
             if(i>10): break
             
             sql_vars = get_palceholders(self.run_year, i)
+            
+            if(i==0): 
+                pct_change_yr_compr = 0
+            else: 
+                pct_change_yr_compr = sql_vars['pct_change_yr_compr']
 
             sql_vars = {
                 'run_yr': sql_vars['run_yr'],
